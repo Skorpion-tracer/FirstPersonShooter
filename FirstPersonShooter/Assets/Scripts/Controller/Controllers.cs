@@ -13,27 +13,24 @@ namespace Geekbrains
         
         public Controllers()
         {
-            IMotor motor = default;
-            if (Application.platform == RuntimePlatform.PS4)
-            {
-                //
-            }
-            else
-            {
-                motor = new UnitMotor(
+            IMotor motor = new UnitMotor(
                     ServiceLocatorMonoBehaviour.GetService<CharacterController>());
-            }
 
             ServiceLocator.SetService(new PlayerController(motor));
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
-            _executeControllers = new IExecute[3];
+            ServiceLocator.SetService(new SelectionController());
+            ServiceLocator.SetService(new WeaponController());
+            ServiceLocator.SetService(new Inventory());
+            _executeControllers = new IExecute[4];
 
             _executeControllers[0] = ServiceLocator.Resolve<PlayerController>();
 
             _executeControllers[1] = ServiceLocator.Resolve<FlashLightController>();
 
             _executeControllers[2] = ServiceLocator.Resolve<InputController>();
+
+            _executeControllers[3] = ServiceLocator.Resolve<SelectionController>();
         }
 
         public void Initialization()
@@ -46,8 +43,10 @@ namespace Geekbrains
                 }
             }
             
+            ServiceLocator.Resolve<Inventory>().Initialization();
             ServiceLocator.Resolve<PlayerController>().On();
             ServiceLocator.Resolve<InputController>().On();
+            ServiceLocator.Resolve<SelectionController>().On();
         }
     }
 }

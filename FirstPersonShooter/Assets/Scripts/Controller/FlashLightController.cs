@@ -35,12 +35,10 @@ namespace Geekbrains
         {
             if(!IsActive)
             {
-                //return;
                 _flashLightModel.RecoverBatteryCharge();
             }
             else
             {
-                //todo add Battery
                 _flashLightModel.Rotation();
                 if (_flashLightModel.EditBatteryCharge())
                 {
@@ -53,7 +51,6 @@ namespace Geekbrains
             }
 
             _flashLightUi.SliderValue = _flashLightModel.BatteryChargeCurrent;
-            _flashLightModel.Rotation();
         }
     }
 }

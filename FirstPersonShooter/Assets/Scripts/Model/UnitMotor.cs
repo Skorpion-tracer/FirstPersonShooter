@@ -1,6 +1,7 @@
 ﻿using Geekbrains;
 using UnityEngine;
 
+
 public sealed class UnitMotor : IMotor
 {
 	private Transform _instance;
