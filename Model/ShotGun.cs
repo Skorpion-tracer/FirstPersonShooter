@@ -6,7 +6,7 @@
         {
             if (!_isReady) return;
             if (Clip.CountAmmunition <= 0) return;
-            Instantiate(Ammunition, _barrel.position, _barrel.rotation);
+            Instantiate(Ammunition, Barrel.position, Barrel.rotation);
             Clip.CountAmmunition--;
             _isReady = false;
             Invoke(nameof(ReadyShoot), _rechergeTime);
