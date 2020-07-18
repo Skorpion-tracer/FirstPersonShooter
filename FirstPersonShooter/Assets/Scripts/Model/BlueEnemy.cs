@@ -3,7 +3,7 @@
 
 namespace Geekbrains
 {
-    public sealed class BlueEnemy : Enemy, ISetDamage, ISelectedObj
+    public sealed class BlueEnemy : Enemy, ICollision, ISelectedObj
     {
         private Vector3 _direction;
 
@@ -14,7 +14,7 @@ namespace Geekbrains
                                      Random.Range(-10, 10));
         }
 
-        public override void SetDamage(InfoCollision info)
+        public override void OnCollision(InfoCollision info)
         {
             if (_isDead) return;
             if (Hp > 0)
@@ -38,7 +38,7 @@ namespace Geekbrains
 
         public string GetMessage()
         {
-            return gameObject.name;
+            return gameObject.name + " / " + Hp.ToString();
         }
     }
 }

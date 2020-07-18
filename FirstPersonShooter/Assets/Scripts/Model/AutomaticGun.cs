@@ -6,8 +6,8 @@
 		{
 			if (!_isReady) return;
 			if (Clip.CountAmmunition <= 0) return;
-			var temAmmunition = Instantiate(Ammunition, _barrel.position, _barrel.rotation);
-			temAmmunition.AddForce(_barrel.forward * Force);
+			var temAmmunition = Instantiate(Ammunition, Barrel.position, Barrel.rotation);
+			temAmmunition.AddForce(Barrel.forward * Force);
 			Clip.CountAmmunition--;
 			_isReady = false;
 			Invoke(nameof(ReadyShoot), _rechergeTime);

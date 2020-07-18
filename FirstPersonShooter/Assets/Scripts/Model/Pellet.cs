@@ -11,19 +11,24 @@ namespace Geekbrains
         {
             base.Awake();
 
-            transform.localPosition = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), 0);
-
+            transform.localRotation = Quaternion.identity;
+            transform.localRotation = Quaternion.Euler(_currentWeapon.Barrel.localRotation.x + Random.Range(_minAngleRot, _maxAngleRot),
+                transform.localRotation.y + Random.Range(_minAngleRot, _maxAngleRot), transform.localRotation.z + Random.Range
+                (_minAngleRot, _maxAngleRot));
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.AddForce(transform.forward * _currentWeapon.Force, ForceMode.Impulse);
+            
         }
 
         private void OnCollisionEnter(Collision collision)
-        {
-            var tempObj = collision.gameObject.GetComponent<ISetDamage>();
+        {            
+            var tempObj = collision.gameObject.GetComponent<ICollision>();
 
             if (tempObj != null)
             {
-                tempObj.SetDamage(new InfoCollision(_curDamage, Rigidbody.velocity));
+                tempObj.OnCollision(new InfoCollision(_curDamage, collision.contacts[0], collision.transform,
+                    Rigidbody.velocity));
+                Debug.Log(collision.gameObject.name);
                 DestroyAmmunition();
             }
             

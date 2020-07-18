@@ -11,8 +11,9 @@ namespace Geekbrains
 
         public AmmunitionType[] AmmunitionTypes = { AmmunitionType.Bullet };
 
-		[SerializeField] protected Transform _barrel;		
-		[SerializeField] protected float _rechergeTime = 0.2f;
+        public Transform Barrel;
+
+        [SerializeField] protected float _rechergeTime = 0.2f;
         [SerializeField] protected int _countAmmunition = 1;
         [SerializeField] private int _countClip = 5;
 

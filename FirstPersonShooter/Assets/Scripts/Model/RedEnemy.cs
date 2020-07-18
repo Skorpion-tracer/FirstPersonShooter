@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Geekbrains
 {
-    public sealed class RedEnemy : Enemy, ISetDamage, ISelectedObj
+    public sealed class RedEnemy : Enemy, ICollision, ISelectedObj
     {
         public event Action OnPointChange;
 
-        public override void SetDamage(InfoCollision info)
+        public override void OnCollision(InfoCollision info)
         {
             if (_isDead) return;
             if (Hp > 0)
@@ -31,7 +31,7 @@ namespace Geekbrains
 
         public string GetMessage()
         {
-            return gameObject.name;
+            return gameObject.name + " / " + Hp.ToString();
         }
     }
 }
