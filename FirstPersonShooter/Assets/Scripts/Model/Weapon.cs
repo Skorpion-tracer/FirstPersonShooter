@@ -33,6 +33,8 @@ namespace Geekbrains
 
 		public abstract void Fire();
 
+        public abstract void StopFire();
+
 		protected void ReadyShoot()
 		{
 			_isReady = true;

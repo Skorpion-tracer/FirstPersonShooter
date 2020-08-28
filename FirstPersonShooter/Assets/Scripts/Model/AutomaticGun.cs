@@ -12,5 +12,10 @@
 			_isReady = false;
 			Invoke(nameof(ReadyShoot), _rechergeTime);
 		}
-	}
+
+        public override void StopFire()
+        {
+            return;
+        }
+    }
 }

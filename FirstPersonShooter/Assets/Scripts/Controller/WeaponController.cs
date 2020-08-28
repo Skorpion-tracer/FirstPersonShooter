@@ -30,6 +30,11 @@
             UiInterface.WeaponUiText.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
         }
 
+        public void StopFire()
+        {
+            _weapon.StopFire();
+        }
+
         public void ReloadClip()
         {
             if (_weapon == null) return;

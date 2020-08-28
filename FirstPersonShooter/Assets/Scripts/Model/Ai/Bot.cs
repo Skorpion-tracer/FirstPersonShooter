@@ -18,6 +18,11 @@ namespace Geekbrains
 
         public event Action<Bot> OnDieChange;
         private ITimeRemaining _timeRemaining;
+        private string _killBot = "Kill";
+
+        private Animator _animatorBot;
+
+        [SerializeField] private Transform _transformWeapon;
 
         private StateBot StateBot
         {
@@ -28,22 +33,23 @@ namespace Geekbrains
                 switch (value)
                 {
                     case StateBot.None:
-                        Color = Color.white;
+                        //Color = Color.white;
                         break;
                     case StateBot.Patrol:
-                        Color = Color.green;
+                        //Color = Color.green;
                         break;
                     case StateBot.Inspection:
-                        Color = Color.yellow;
+                        //Color = Color.yellow;
                         break;
                     case StateBot.Detected:
-                        Color = Color.red;
+                        //Color = Color.red;
                         break;
                     case StateBot.Died:
-                        Color = Color.gray;
+                        //Color = Color.gray;
+                        _animatorBot.SetBool(_killBot, true);
                         break;
                     default:
-                        Color = Color.white;
+                        //Color = Color.white;
                         break;
                 }
 
@@ -55,6 +61,7 @@ namespace Geekbrains
             base.Awake();
             Agent = GetComponent<NavMeshAgent>();
             _timeRemaining = new TimeRemaining(ResetStateBot, _waitTime);
+            _animatorBot = GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -148,19 +155,29 @@ namespace Geekbrains
             {
                 StateBot = StateBot.Died;
                 Agent.enabled = false;
-                foreach (var child in GetComponentsInChildren<Transform>())
-                {
-                    child.parent = null;
+                _transformWeapon.gameObject.SetActive(false);
 
-                    var tempRbChild = child.GetComponent<Rigidbody>();
-                    if (!tempRbChild)
-                    {
-                        tempRbChild = child.gameObject.AddComponent<Rigidbody>();
-                    }
-                    //tempRbChild.AddForce(info.Dir * Random.Range(10, 300));
-                    
-                    Destroy(child.gameObject, 10);
-                }
+                //foreach (var child in GetComponentsInChildren<Transform>())
+                //{
+                //    child.parent = null;
+
+                //    var tempRbChild = child.GetComponent<Rigidbody>();
+                //    if (!tempRbChild)
+                //    {
+                //        tempRbChild = child.gameObject.AddComponent<Rigidbody>();
+                //    }
+                //    //tempRbChild.AddForce(info.Dir * Random.Range(10, 300));
+
+                //    Destroy(child.gameObject, 10);
+                //}
+
+                //var tempRbChild = GetComponent<Rigidbody>();
+                //if (!tempRbChild)
+                //{
+                //    tempRbChild = gameObject.AddComponent<Rigidbody>();
+                //}
+
+                Destroy(gameObject, 10);
 
                 OnDieChange?.Invoke(this);
             }

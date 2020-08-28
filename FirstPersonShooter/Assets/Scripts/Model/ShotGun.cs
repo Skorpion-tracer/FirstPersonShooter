@@ -8,7 +8,11 @@
             if (Clip.CountAmmunition <= 0) return;
             Instantiate(Ammunition, Barrel.position, Barrel.rotation);
             Clip.CountAmmunition--;
-            _isReady = false;
+            _isReady = false;            
+        }
+
+        public override void StopFire()
+        {
             Invoke(nameof(ReadyShoot), _rechergeTime);
         }
     }

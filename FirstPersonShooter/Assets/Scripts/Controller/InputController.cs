@@ -75,6 +75,14 @@ namespace Geekbrains
                 }
             }
 
+            if (Input.GetMouseButtonUp(_mouseButton))
+            {
+                if (ServiceLocator.Resolve<WeaponController>().IsActive)
+                {
+                    ServiceLocator.Resolve<WeaponController>().StopFire();
+                }
+            }
+
             if (Input.GetKeyDown(_cancel))
             {
                 ServiceLocator.Resolve<WeaponController>().Off();

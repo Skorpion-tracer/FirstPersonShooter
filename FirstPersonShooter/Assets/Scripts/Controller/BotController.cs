@@ -8,7 +8,7 @@ namespace Geekbrains
 {
     public sealed class BotController : BaseController, IExecute, IInitialization
     {
-        private readonly int _countBot = 5;
+        private readonly int _countBot = 20;
         private readonly List<Bot> _botList  = new List<Bot>();
 
         public void Initialization()
